@@ -91,9 +91,27 @@ Ask the user ONE question at a time using the AskUserQuestion tool. Always provi
 **First question:** "Do you have an existing CV, LinkedIn export, or career summary I can start from?"
 - Options: "Yes, I'll paste it now" / "Yes, I have a file path" / "No, let's start from scratch"
 
-**If they provide content:** Read it, parse it into the encyclopedia structure below, then interview to fill gaps — one question at a time.
+**If they provide content:** Read it and parse it into the encyclopedia structure below. Then you MUST conduct a thorough clarification interview BEFORE saving. Do NOT skip this step. Do NOT move on to dimensions until the interview is complete.
 
-**If starting from scratch:** Interview systematically through each section below, one question at a time:
+**MANDATORY CLARIFICATION INTERVIEW (after parsing provided content):**
+
+Go through the parsed content section by section and ask about anything that is missing, vague, or could be stronger. Ask ONE question at a time using AskUserQuestion. Typical gaps to probe:
+
+- **For each role:** "What was your team size at {company}?" / "What was the key achievement you're most proud of here?" / "Why did you leave?"
+- **Technologies:** "You mention {technology} — what's your honest proficiency level?" (Options: Deep hands-on / Working knowledge / Oversight only / Historical, not current)
+- **Missing sections:** If the content doesn't mention side projects, education details, or career aspirations, ask about each.
+- **Ambiguous dates:** "You mentioned {company} — when approximately did you start and leave?"
+- **Achievements without metrics:** "You mention {achievement} — can you quantify the impact? Team size, revenue, users, budget?"
+- **Career aspirations:** ALWAYS ask these even if not in the source content:
+  - "What kind of role are you looking for next?" 
+  - "What energizes you at work?"
+  - "What drains you?"
+  - "What's your minimum compensation requirement?"
+  - "Location preferences — remote, hybrid, relocation?"
+
+Ask at minimum 5-8 clarifying questions. The goal is to make the encyclopedia richer than the source content, not just a reformatted copy. This interview is the core value of the setup process.
+
+**If starting from scratch (no source content):** Interview systematically through each section below, one question at a time:
 
 1. **Personal details** — name, email, location, languages
 2. **Education** — degrees, institutions, dates

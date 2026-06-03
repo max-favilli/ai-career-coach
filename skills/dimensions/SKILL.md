@@ -19,22 +19,37 @@ Check if `dimensions.md` exists in the workspace root.
 
 **If it doesn't exist:** Check if `encyclopedia/career-encyclopedia.md` has content. If so, read it — especially the Career Aspirations section — and suggest dimensions based on the user's profile and goals. If the encyclopedia is empty, tell the user to run `/setup` first.
 
-### Step 2: Suggest or refine dimensions
+### Step 2: Present the default dimensions
 
-Start with these defaults, but tailor the suggestions based on the encyclopedia content:
+Always start by presenting these 5 battle-tested dimensions. Do NOT invent new ones or rename them unless the user explicitly asks. These are the defaults:
 
-1. **Hard Skills Match** — Technologies, tools, platforms, technical competencies. How well do the JD's technical requirements overlap with proven skills?
+1. **Hard Skills Match** — Technologies, tools, platforms, technical competencies. How well do the JD's technical requirements overlap with proven skills in the encyclopedia?
+   - Scores high: significant overlap with hands-on skills
+   - Scores low: JD requires deep expertise in technologies the user hasn't used
+
 2. **Domain Match** — Industry, business model, domain expertise. How familiar is the user with this sector?
+   - Scores high: direct experience in the industry or closely adjacent ones
+   - Scores low: completely unfamiliar industry with domain-specific requirements
+
 3. **Leadership Match** — Scope, team size, seniority level, organizational complexity. Does the role match their leadership experience?
-4. **Culture & Values Match** — Company culture signals vs. what energizes the user. Red flags like bureaucracy, micromanagement, or values misalignment.
-5. **Career Trajectory Fit** — Does this role move toward stated career goals? Advances the narrative or is it lateral/backwards?
+   - Scores high: role scope aligns with proven leadership track record
+   - Scores low: significant gap in team size, budget, or organizational complexity (either too big or too small)
 
-For each dimension, ask ONE question at a time using AskUserQuestion:
+4. **Culture & Values Match** — Company culture signals from JD language vs. what energizes the user (from encyclopedia Career Aspirations).
+   - Scores high: JD signals align with what the user thrives in
+   - Scores low: red flags like bureaucracy, micromanagement, values misalignment, or culture the user explicitly wants to avoid
 
-"Is **[dimension name]** important to you when evaluating job opportunities? [Brief description of what it measures]"
-- Options: "Very important" / "Somewhat important" / "Not very important" / "Remove this dimension"
+5. **Career Trajectory Fit** — Does this role move the user toward their stated career goals? Does it advance their narrative or is it lateral/backwards?
+   - Scores high: clear step toward career aspirations, develops target capabilities
+   - Scores low: lateral move, dead-end, or pulls away from goals
 
-If the user wants to add custom dimensions, ask for:
+Present all 5 to the user and ask: "These are the recommended scoring dimensions. Would you like to customize them?"
+- Options: "These are good, save them" / "I want to adjust weights" / "I want to add a dimension" / "I want to remove one"
+
+For weight adjustment, ask about each dimension ONE at a time:
+- Options: "High" / "Medium" / "Low"
+
+If the user wants to add a custom dimension, ask for:
 - Name
 - What it measures
 - What scores high vs. low
