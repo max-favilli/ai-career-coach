@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-career-coach-marketplace",
+  "description": "AI Career Coach plugin for Claude Code",
+  "owner": {
+    "name": "Max Favilli",
+    "url": "https://linkedin.com/in/maxfavilli"
+  },
+  "plugins": [
+    {
+      "name": "ai-career-coach",
+      "description": "AI career coach: analyze job descriptions, maintain your professional profile, and generate tailored CVs",
+      "author": {
+        "name": "Max Favilli"
+      },
+      "category": "productivity",
+      "source": "./"
+    }
+  ]
+}
