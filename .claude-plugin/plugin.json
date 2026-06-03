@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "ai-career-coach",
+  "version": "1.0.0",
+  "description": "AI career coach: analyze job descriptions against your profile, conduct gap interviews, and generate tailored CVs. Tells you when to pass — your time is more valuable than another application.",
+  "author": {
+    "name": "Max Favilli",
+    "url": "https://linkedin.com/in/maxfavilli"
+  },
+  "skills": [
+    "./"
+  ]
+}
