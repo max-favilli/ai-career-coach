@@ -39,7 +39,19 @@ Identify the "persona" the JD is looking for — e.g., "hands-on engineering lea
 
 ### Step 4: Score match
 
-Score the match on each dimension from `dimensions.md` (each X/10). Present as a table with brief notes for each score.
+Score the match on each dimension from `dimensions.md` (each X/10).
+
+**CRITICAL: ALWAYS present scores as a markdown table. Never use a list or any other format.**
+
+Example format (use exactly this structure):
+
+| Dimension | Score | Notes |
+|---|---|---|
+| Hard Skills Match | 4/10 | PHP/Laravel blocker. Architecture and integration patterns are strong. |
+| Domain Match | 9/10 | Enterprise eCommerce / D2C — strongest domain. |
+| Leadership Match | 7/10 | Right scope — mentor leads, own recruitment. |
+| Culture & Values Match | 8/10 | Builder arena, fast-growing, agile. |
+| Career Trajectory Fit | 7/10 | eCommerce + integration + AI — right direction. |
 
 ### Step 5: Give honest recommendation
 
