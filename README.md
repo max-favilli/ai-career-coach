@@ -4,7 +4,11 @@ A Claude Code plugin that turns Claude into your long-term career positioning pa
 
 ## What it does
 
-Most people paste a job description into AI and get a generic CV back. This plugin does something different: it builds a deep understanding of your career, scores every job opportunity against your profile, coaches you through targeted gap interviews, and generates tailored CVs that tell the right story for each role. It also tells you when to **pass** — your time is more valuable than another application.
+Most people paste a job description into AI and get a generic CV back. This plugin does something different: it builds a deep, persistent understanding of your career that **grows with every interaction**.
+
+Every gap interview surfaces experience you forgot to mention. Every JD analysis reveals skills worth capturing. Every conversation adds to your career encyclopedia — so the 10th CV you generate is dramatically better than the first, because Claude knows things about your career that aren't on any single CV.
+
+The plugin also tells you when to **pass** — your time is more valuable than another application.
 
 ## Installation
 
@@ -53,7 +57,7 @@ cd ai-career-coach
 
 The core of the system is your **career encyclopedia** — a structured document containing everything about your professional history: roles, achievements, technologies, skills (with honest proficiency levels), career aspirations, and key stories. The `/setup` command builds this through an interactive interview, and `/add-to-encyclopedia` lets you expand it over time.
 
-The encyclopedia is the single source of truth. Every JD analysis and CV tailoring reads from it. The richer it is, the better the output.
+The encyclopedia is the single source of truth. Every JD analysis and CV tailoring reads from it. **Crucially, it grows with every interaction:** gap interviews during `/jd` often surface experience you didn't think to include ("Oh right, I did pre-sales at that job too"), and those discoveries get added back to the encyclopedia. The more jobs you analyze, the more Claude knows about you, and the more precise every subsequent CV becomes.
 
 ### Dimensions
 
@@ -77,6 +81,7 @@ When you run `/jd`, the plugin:
 - Scores the match on each of your dimensions (presented as a table)
 - Gives an honest recommendation: **Strong match** / **Worth applying** / **Stretch** / **Pass**
 - Conducts a gap interview — one question at a time with pre-baked answer options — to surface hidden experience and identify deal-breakers
+- **Updates your encyclopedia** with anything new discovered during the interview (skills, experience, preferences you hadn't captured yet)
 - Saves the analysis and appends to a running log (`jd-log.md`)
 
 ### Tailored CVs
@@ -109,6 +114,16 @@ my-job-search/
     ├── {Name}-cv-{company}-styled.html
     └── {Name}-cv-{company}.pdf
 ```
+
+## Why it gets better over time
+
+This is what makes the plugin different from a one-shot AI CV generator:
+
+1. **JD #1:** You run `/setup`, paste your CV, answer 10 questions. The encyclopedia has the basics.
+2. **JD #5:** Gap interviews have surfaced pre-sales experience you forgot, a side project with 1M users, and the fact that you provisioned cloud infrastructure yourself. All added to the encyclopedia.
+3. **JD #15:** Claude knows your career so deeply that it can frame your experience as a "builder who brings order to complexity" for a startup, or an "SAP transformation leader" for an enterprise role, or a "cloud modernization architect" for a consulting firm — each version truthful, each perfectly targeted. The encyclopedia now contains insights that no single CV or LinkedIn profile ever captured.
+
+The encyclopedia is the compounding asset. Every conversation makes it richer.
 
 ## Philosophy
 

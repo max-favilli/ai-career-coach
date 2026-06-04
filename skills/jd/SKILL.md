@@ -75,6 +75,18 @@ If the recommendation is NOT a hard pass, conduct a gap interview. Ask 3-6 targe
 
 After the gap interview, update the recommendation if answers changed the picture.
 
+### Step 6b: Update the encyclopedia
+
+**IMPORTANT:** If the gap interview surfaced NEW information about the user — skills they didn't mention, experience not in the encyclopedia, career preferences, deal-breakers — update `encyclopedia/career-encyclopedia.md` with the new discoveries. This is how the system gets smarter over time: every JD analysis enriches the user's profile.
+
+Examples of what to add:
+- "I actually did pre-sales at that job too" → add to the role's entry
+- "I used Angular at my startup" → add to Technology Skills
+- "I won't relocate to city X" → add to Career Aspirations / Location preferences
+- "My max team size was 27" → add to the relevant role
+
+Mark any unverified additions with `[UNVERIFIED]`.
+
 ### Step 7: Save the analysis
 
 Save to `jd-analysis/{company}-{role-short}.md` using kebab-case naming. Include:
