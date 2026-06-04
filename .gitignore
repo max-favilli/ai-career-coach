@@ -5,3 +5,6 @@ tailored-cvs/
 jd-log.md
 dimensions.md
 CLAUDE.md
+
+# Local development skills (copies of skills/ for local testing)
+.claude/skills/
