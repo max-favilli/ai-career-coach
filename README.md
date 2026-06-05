@@ -34,12 +34,17 @@ cd ai-career-coach
 
 1. **Install the plugin** using the commands above
 2. **Create a workspace folder** for your job search (e.g. `mkdir my-job-search && cd my-job-search`)
-3. **Run `/setup`** — it walks you through everything interactively:
+3. **Launch Claude Code** in that folder (run `claude` in your terminal)
+4. **Run `/setup`** — it walks you through everything interactively:
    - Creates the folder structure
    - Builds your career encyclopedia through an interview (you can paste an existing CV or LinkedIn export to speed this up)
    - Optionally defines your scoring dimensions
-4. **Analyze a job** — paste a job description with `/jd`
-5. **Generate a tailored CV** — run `/cv` if the analysis says it's worth applying
+5. **Analyze a job** — paste a job description with `/jd`:
+   - Scores the role against your profile across each dimension (hard skills, domain, leadership, culture, trajectory)
+   - Gives an honest recommendation: apply, stretch, or pass
+   - Conducts a gap interview to dig into your past experience that matches this specific JD
+   - New discoveries get added to your encyclopedia — so the next analysis is even better
+6. **Generate a tailored CV** — run `/cv` if the analysis says it's worth applying
 
 ## Commands
 
