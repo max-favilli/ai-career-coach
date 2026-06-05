@@ -17,9 +17,18 @@ The plugin also tells you when to **pass** — your time is more valuable than a
 3. **Generate persona-targeted CVs** — The same career gets framed as "builder/CTO" for a startup, "SAP transformation leader" for enterprise, or "cloud modernization architect" for consulting — each truthful, each perfectly targeted to what the hiring manager is looking for.
 4. **Track your entire job search** — Every JD analyzed is logged with date, company, recommendation, and application status. See your full pipeline at a glance.
 
-## Installation
+## Getting Started
 
-### From the marketplace
+### Prerequisites
+
+1. **Install Claude Code CLI** — If you don't have Claude Code yet, install it from [claude.ai/code](https://claude.ai/code). Claude Code is Anthropic's CLI tool for working with Claude directly in your terminal. Available on Mac, Windows, and Linux.
+
+2. **Verify it works** — Open your terminal and run:
+   ```bash
+   claude --version
+   ```
+
+### Install the plugin
 
 ```bash
 # Add the marketplace
@@ -29,29 +38,42 @@ claude plugin marketplace add max-favilli/ai-career-coach
 claude plugin install ai-career-coach
 ```
 
-### From source (for development)
+### Set up your workspace
+
+```bash
+# Create a folder for your job search
+mkdir my-job-search
+cd my-job-search
+
+# Launch Claude Code
+claude
+```
+
+### Build your career profile
+
+1. **Run `/setup`** — it walks you through everything interactively:
+   - Creates the folder structure
+   - Builds your career encyclopedia through an interview (you can paste an existing CV or LinkedIn export to speed this up)
+   - Optionally defines your scoring dimensions
+
+2. **Analyze a job** — paste a job description with `/jd`:
+   - Researches the company automatically
+   - Scores the role against your profile across customizable dimensions (hard skills, domain, leadership, culture, trajectory)
+   - Gives an honest recommendation: apply, stretch, or pass
+   - Conducts a gap interview to dig into your past experience that matches this specific JD
+   - New discoveries get added to your encyclopedia — so the next analysis is even better
+
+3. **Generate a tailored CV** — run `/cv` if the analysis says it's worth applying
+
+4. **Generate a cover letter** — run `/cover-letter` for a short, compelling letter in your voice
+
+### For developers (from source)
 
 ```bash
 git clone https://github.com/max-favilli/ai-career-coach.git
 cd ai-career-coach
 # Skills in .claude/skills/ are loaded automatically when you open Claude Code in this folder
 ```
-
-## Getting started
-
-1. **Install the plugin** using the commands above
-2. **Create a workspace folder** for your job search (e.g. `mkdir my-job-search && cd my-job-search`)
-3. **Launch Claude Code** in that folder (run `claude` in your terminal)
-4. **Run `/setup`** — it walks you through everything interactively:
-   - Creates the folder structure
-   - Builds your career encyclopedia through an interview (you can paste an existing CV or LinkedIn export to speed this up)
-   - Optionally defines your scoring dimensions
-5. **Analyze a job** — paste a job description with `/jd`:
-   - Scores the role against your profile across each dimension (hard skills, domain, leadership, culture, trajectory)
-   - Gives an honest recommendation: apply, stretch, or pass
-   - Conducts a gap interview to dig into your past experience that matches this specific JD
-   - New discoveries get added to your encyclopedia — so the next analysis is even better
-6. **Generate a tailored CV** — run `/cv` if the analysis says it's worth applying
 
 ## Commands
 
