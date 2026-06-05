@@ -37,7 +37,9 @@
 
 ## Phase 3: Enhancements
 
-- [ ] `/cover-letter` — generate tailored cover letter based on JD analysis
+- [x] `/cover-letter` — generate tailored cover letter based on JD analysis
+- [x] `/jd` company research — quick web search before scoring for better context
+- [x] Scoring anchors — calibration rules to prevent over-optimistic scoring (default to 5)
 - [ ] `/status` — show overview (encyclopedia completeness, dimensions defined, JDs analyzed, CVs generated)
 - [ ] `/jd` auto-detect duplicate JDs (already analyzed)
 - [ ] `/cv` support multiple CV styles/templates
@@ -48,7 +50,15 @@
 
 ## Phase 4: Community & Distribution
 
-- [ ] Submit to official Claude Code marketplace (Anthropic review)
-- [ ] Write a blog post / LinkedIn article about the approach
+- [x] Submit to official Claude Code marketplace (Anthropic review) — submitted 2026-06-05, awaiting review
+- [x] Write a blog post about the approach
+- [x] Marketing plan with Reddit/HN calendar (MARKETING.md, gitignored)
+- [x] r/ClaudeAI post
+- [ ] Hacker News Show HN post
+- [ ] r/ExperiencedDevs post
+- [ ] r/jobsearch post
+- [ ] r/resumes post
+- [ ] r/careerguidance post
+- [ ] r/ChatGPTCoding post
 - [ ] Add screenshots/examples to README
 - [ ] Gather community feedback

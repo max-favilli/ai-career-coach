@@ -33,6 +33,19 @@ Parse the JD into structured sections:
 - Culture signals (from language, values, tone)
 - Compensation (if stated)
 
+### Step 2b: Quick company research
+
+If the company name is identifiable from the JD, do a brief web search to understand:
+- What the company does (product, service, industry)
+- Company size and stage (startup, scale-up, enterprise)
+- Funding status and financial health (if available)
+- Recent news or notable facts
+- Glassdoor/reputation signals (if easily found)
+
+Summarize in 2-3 sentences at the top of the analysis. This provides context for more accurate scoring — especially for Culture & Values and Career Trajectory dimensions.
+
+If the company is anonymous (via recruiter), skip this step and note "Company anonymous — no research possible."
+
 ### Step 3: Identify the persona
 
 Identify the "persona" the JD is looking for — e.g., "hands-on engineering leader," "strategic IT director," "digital commerce platform owner," "startup CTO." This determines how to frame the user's experience if they proceed to `/cv`.
@@ -40,6 +53,13 @@ Identify the "persona" the JD is looking for — e.g., "hands-on engineering lea
 ### Step 4: Score match
 
 Score the match on each dimension from `dimensions.md` (each X/10).
+
+**Scoring calibration:** Default to 5 when information is ambiguous or missing. Only score higher with clear evidence. A company that doesn't disclose salary is a 5, not a 9. A JD that doesn't mention team size is a 5 on leadership match.
+- **9-10:** Exceptional match — direct, proven, deep experience
+- **7-8:** Strong match — significant overlap, minor gaps
+- **5-6:** Neutral or partial — some match, some unknowns
+- **3-4:** Weak — meaningful gaps or misalignment
+- **1-2:** Hard blocker — fundamental mismatch
 
 **CRITICAL: ALWAYS present scores as a markdown table. Never use a list or any other format.**
 

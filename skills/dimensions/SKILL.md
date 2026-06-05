@@ -43,6 +43,16 @@ Always start by presenting these 5 battle-tested dimensions. Do NOT invent new o
    - Scores high: clear step toward career aspirations, develops target capabilities
    - Scores low: lateral move, dead-end, or pulls away from goals
 
+**Scoring anchors** — when saving dimensions, always include these calibration rules:
+
+> **How to score:** Default to 5 (neutral) when information is ambiguous or missing. Only score higher with clear evidence from the JD and encyclopedia. A company that doesn't disclose salary is a 5 on compensation, not a 9. A JD that doesn't mention team size is a 5 on leadership match, not an assumption.
+>
+> - **9-10:** Exceptional match — direct, proven, deep experience
+> - **7-8:** Strong match — significant overlap, minor gaps
+> - **5-6:** Neutral or partial — some match, some unknowns
+> - **3-4:** Weak — meaningful gaps or misalignment
+> - **1-2:** Hard blocker — fundamental mismatch or missing requirement
+
 Present all 5 to the user and ask: "These are the recommended scoring dimensions. Would you like to customize them?"
 - Options: "These are good, save them" / "I want to adjust weights" / "I want to add a dimension" / "I want to remove one"
 

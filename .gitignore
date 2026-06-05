@@ -8,3 +8,6 @@ CLAUDE.md
 
 # Local development skills (copies of skills/ for local testing)
 .claude/skills/
+
+# Internal docs (not part of the plugin)
+docs/

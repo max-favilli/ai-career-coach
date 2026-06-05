@@ -73,6 +73,7 @@ Follow the table with the overall recommendation and key concerns.
 - `/dimensions` — Define or refine scoring dimensions
 - `/jd` — Analyze a job description
 - `/cv` — Craft a tailored CV after JD analysis
+- `/cover-letter` — Generate a tailored cover letter after JD analysis
 - `/add-to-encyclopedia` — Add new career content
 
 ## Representation Rules

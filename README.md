@@ -61,6 +61,7 @@ cd ai-career-coach
 | `/dimensions` | Define the scoring criteria used to evaluate job descriptions against your profile. |
 | `/jd` | Analyze a job description. Scores it on your dimensions, gives an honest recommendation, conducts a gap interview. |
 | `/cv` | Craft a tailored CV for a role you've analyzed with `/jd`. Generates markdown, styled HTML, and PDF. |
+| `/cover-letter` | Generate a tailored cover letter for a role you've analyzed with `/jd`. Short, compelling, in your voice. |
 | `/add-to-encyclopedia` | Add new career content — paste a CV, LinkedIn export, or career notes and it gets integrated. |
 
 ## How it works
