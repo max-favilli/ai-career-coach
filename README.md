@@ -10,6 +10,13 @@ Every gap interview surfaces experience you forgot to mention. Every JD analysis
 
 The plugin also tells you when to **pass** — your time is more valuable than another application.
 
+### Use cases
+
+1. **Analyze a job posting before applying** — Paste a JD, get an honest score across customizable dimensions (defaults: hard skills, domain, leadership, culture, career trajectory), and a clear recommendation: apply or pass. Stop wasting time on poor-fit roles.
+2. **Surface hidden experience through gap interviews** — The interactive interview digs into your past and surfaces relevant experience you forgot to mention. "Oh right, I did pre-sales at that job too." Every discovery gets saved to your encyclopedia.
+3. **Generate persona-targeted CVs** — The same career gets framed as "builder/CTO" for a startup, "SAP transformation leader" for enterprise, or "cloud modernization architect" for consulting — each truthful, each perfectly targeted to what the hiring manager is looking for.
+4. **Track your entire job search** — Every JD analyzed is logged with date, company, recommendation, and application status. See your full pipeline at a glance.
+
 ## Installation
 
 ### From the marketplace
