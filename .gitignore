@@ -11,3 +11,12 @@ CLAUDE.md
 
 # Internal docs (not part of the plugin)
 docs/
+interviews/
+
+# Personal job-search working data (never commit — remote is public)
+HANDOVER.md
+cv-checklist.md
+scraper/screening-log.md
+scraper/out/
+scraper/urls*.txt
+scraper/linkedin_screener_handoff.md
