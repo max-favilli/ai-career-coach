@@ -14,6 +14,7 @@ docs/
 interviews/
 
 # Personal job-search working data (never commit — remote is public)
+screening-criteria.md
 HANDOVER.md
 cv-checklist.md
 scraper/screening-log.md

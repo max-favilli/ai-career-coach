@@ -1,6 +1,6 @@
 ---
 name: jd
-description: "Analyze a job description against your career profile. Scores the match, gives an honest recommendation, and conducts a gap interview. Use when: user says 'analyze this JD', 'evaluate this job', 'is this role a good fit', or pastes a job description."
+description: "Analyze a job description against your career profile. Scores the match, gives an honest recommendation, and conducts a gap interview. Use when: user says 'analyze this JD', 'evaluate this job', 'is this role a good fit', pastes a job description, or provides a link to a LinkedIn job posting."
 ---
 
 # JD — Analyze Job Description
@@ -9,7 +9,23 @@ Analyze a job description against the user's career encyclopedia. Parse, score, 
 
 ## Instructions
 
-The user has provided a job description (in the conversation, as $ARGUMENTS, or will paste it). Analyze it against their career.
+The user has provided a job description (in the conversation, as $ARGUMENTS, or will paste it) — either as text or as a link to the job posting. Analyze it against their career.
+
+### Step 0: Acquire the JD text
+
+If the input is a **LinkedIn job URL** (contains `linkedin.com/jobs/view/` or `currentJobId=`) instead of pasted text:
+
+1. Run the bundled scraper from the workspace root:
+   ```
+   python scraper/linkedin_jd_scraper.py --url "<url>" -o scraper/out
+   ```
+   (Requires `pip install requests beautifulsoup4`. If the script isn't at that path, locate it with Glob.)
+2. Read the scraped posting from `scraper/out/jobs/<job_id>.md` and use it as the JD text for all following steps. Record the source URL in the analysis.
+3. **If the scrape fails or returns no description** (login-gated, closed, or rate-limited posting), say so explicitly and ask the user to paste the JD text. **Never analyze a posting from the URL slug or from memory.**
+
+For a non-LinkedIn URL, try fetching the page; if the description can't be extracted cleanly, ask for a paste.
+
+If the input is already pasted JD text, skip this step.
 
 ### Step 1: Load context
 
