@@ -66,6 +66,23 @@ If the company is anonymous (via recruiter), skip this step and note "Company an
 
 Identify the "persona" the JD is looking for — e.g., "hands-on engineering leader," "strategic IT director," "digital commerce platform owner," "startup CTO." This determines how to frame the user's experience if they proceed to `/cv`.
 
+### Step 3b: Match every qualification, one by one — BEFORE scoring or judging shape
+
+Do not decide fit from the title, the industry, or the role's "shape" (consulting, platform, internal IT…) until this step is done. Shape rules are heuristics; the qualification list is evidence.
+
+1. **Extract every qualification** the JD states — each bullet under "Requirements", "Qualifications", "What we're looking for", "Must-have", "Preferred/Nice-to-have". Keep the JD's own wording. Note whether each is *required* or *preferred*, and whether it is phrased as an "or" list (any one item satisfies it) or as a conjunction.
+2. **Match each one against the encyclopedia** and produce a table:
+
+   | # | Qualification (JD wording) | Required / Preferred | Evidence from the encyclopedia | Verdict |
+   |---|---|---|---|---|
+
+   Verdicts: **Strong** (direct, proven evidence) · **Adjacent** (related experience, honest framing needed) · **Miss** (no evidence — never claim it) · **Unknown** (the encyclopedia is silent or ambiguous).
+3. **Grill the user interactively on every Adjacent and Unknown item, one at a time**, using AskUserQuestion with 2–4 pre-baked options that describe plausible truthful answers (e.g. "Yes, strongly — with evidence", "Partly — my team did this under my leadership, not me personally", "No"). Ask one qualification per question. Do not batch. Update the table with the answers.
+4. **Distinguish "led" from "did".** When the user's answer is "my people did this under my leadership", record it as *led, not performed* — claimable as leadership, never as hands-on skill.
+5. Only then proceed to scoring. The dimension scores must be consistent with the table: a required *Miss* caps Hard Skills; a list that is mostly *Strong* cannot produce a "poor fit" on hard skills regardless of the role's shape.
+6. Save the completed table in the analysis file (Step 7) and record any new facts the grilling surfaced in the encyclopedia (Step 6b).
+7. **Exception — absolute disqualifiers:** if the user has defined an absolute disqualifier (for example a language they do not speak and will never claim) and the JD requires it, build the table but skip the grilling and go straight to a Pass, stating the disqualifier. Do not spend the user's time confirming strengths for a role they cannot take.
+
 ### Step 4: Score match
 
 Score the match on each dimension from `dimensions.md` (each X/10).
