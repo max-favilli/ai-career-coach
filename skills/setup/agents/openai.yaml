@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Coach Setup"
+  short_description: "Build your persistent career profile"
+  default_prompt: "Use $ai-career-coach:setup to build my career profile from my CV or an interview."

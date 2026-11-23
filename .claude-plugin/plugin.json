@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ai-career-coach",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AI career coach that builds a deep, persistent understanding of your career. Every job analysis enriches your profile — so the 10th CV you generate is dramatically better than the first. Analyzes JDs, scores fit, conducts gap interviews, and generates tailored CVs.",
   "homepage": "https://github.com/max-favilli/ai-career-coach/blob/main/README.md",
   "author": {

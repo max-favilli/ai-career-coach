@@ -1,0 +1,4 @@
+interface:
+  display_name: "Job Fit Analysis"
+  short_description: "Evaluate a role against your career profile"
+  default_prompt: "Use $ai-career-coach:jd to evaluate this job description against my career profile."

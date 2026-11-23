@@ -1,0 +1,4 @@
+interface:
+  display_name: "Screen Job Postings"
+  short_description: "Screen and rank LinkedIn jobs against your profile"
+  default_prompt: "Use $ai-career-coach:screen to screen these LinkedIn job postings against my career profile."

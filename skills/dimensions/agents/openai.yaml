@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Scoring Dimensions"
+  short_description: "Customize how job opportunities are scored"
+  default_prompt: "Use $ai-career-coach:dimensions to customize how job opportunities are scored for me."

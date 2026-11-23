@@ -1,22 +1,26 @@
 ---
 name: cv
-description: "Craft a tailored CV for a specific role after JD analysis. Generates markdown, styled HTML, and PDF. Use when: user says 'write a CV', 'tailor my CV', 'create a resume for this role'."
+description: Create a truthful, persona-targeted CV for a role that has already been analyzed, with Markdown and print-ready HTML plus PDF when local tooling permits. Use when the user asks to write or tailor a CV or resume for a specific opportunity.
 ---
 
 # CV — Craft Tailored CV
 
-Generate a tailored CV for a specific role after `/jd` analysis and gap interview are complete.
+Generate a tailored CV for a specific role after the `jd` analysis and gap interview are complete.
+
+## Workspace and invocation
+
+Resolve career-file paths relative to the user's career workspace, never the installed plugin directory. Skill names below can be invoked as `$ai-career-coach:skill-name` in Codex or `/ai-career-coach:skill-name` in Claude Code; natural-language requests also work.
 
 ## Instructions
 
 ### Step 1: Load context
 
-1. Read `encyclopedia/career-encyclopedia.md`. If missing, tell the user to run `/setup` first.
-2. List JD analyses in `jd-analysis/`. 
+1. Read `encyclopedia/career-encyclopedia.md`. If missing or empty, tell the user to use the `setup` skill first and stop.
+2. Use the analysis explicitly identified by the user or established in the current conversation. Otherwise, list JD analyses in `jd-analysis/`.
    - If only one exists, use it.
-   - If multiple exist, ask the user which one (use AskUserQuestion with the available analyses as options).
-   - If none exist, tell the user to run `/jd` first.
-3. Read the selected JD analysis. If it was a "Pass" recommendation, warn the user: "This JD was analyzed as a Pass. Are you sure you want to tailor a CV for it?"
+   - If multiple exist, ask the user which one. Use an interactive user-input tool when available and show up to three likely analyses; otherwise ask directly.
+   - If none exist, tell the user to use the `jd` skill first and stop.
+3. Read the selected JD analysis. If the qualification or gap interview is incomplete, resolve relevant unknowns one question at a time before drafting, unless the user explicitly asks to proceed with confirmed facts only. If it recommends **Poor fit** (or an older **Pass**), briefly note the blockers and honor the user's explicit request to create a CV anyway.
 
 ### Step 2: Select the frame
 
@@ -63,14 +67,15 @@ Write a markdown CV with these sections:
 ### Step 4: Representation rules
 
 - Never fabricate experience or skills
+- Exclude `[UNVERIFIED]` or contradictory claims until the user resolves them; missing metrics are not permission to invent numbers
 - Frame oversight as oversight, not hands-on expertise
 - Early career roles can be compressed or omitted if irrelevant
 - Strategic representation is OK — emphasize what's relevant, compress what isn't
-- Education: state what was studied and where, without specifying completion status
+- Education: describe studies accurately; name an awarded degree only when completion is confirmed, and never imply graduation from attendance alone
 
 ### Step 5: Save markdown
 
-Save to `tailored-cvs/{Name}-cv-{company}-{role-short}.md` using the user's name from the encyclopedia.
+Save to `tailored-cvs/{Name}-cv-{company}-{role-short}.md` using the user's name from the encyclopedia. Create the directory if needed. Sanitize filename components to exclude path separators and reserved characters. Keep one consistent basename across Markdown, HTML, and PDF. Preserve a different posting's files with a posting ID or date suffix; update files for this same application when iterating.
 
 ### Step 6: Generate styled HTML
 
@@ -81,6 +86,7 @@ Create a styled HTML version with inline CSS optimized for printing. Use this ba
 <html>
 <head>
 <meta charset="utf-8">
+<title>Curriculum Vitae</title>
 <style>
   body { font-family: 'Segoe UI', Calibri, Arial, sans-serif; font-size: 11px; line-height: 1.45; color: #222; max-width: 800px; margin: 0 auto; padding: 20px 40px; }
   h1 { font-size: 22px; margin-bottom: 2px; color: #111; }
@@ -106,24 +112,21 @@ Create a styled HTML version with inline CSS optimized for printing. Use this ba
 </html>
 ```
 
-Convert the markdown CV to HTML manually (don't use npx marked — write the HTML directly for control over formatting). Save to `tailored-cvs/{Name}-cv-{company}-{role-short}-styled.html`.
+Convert the markdown CV to HTML manually (don't use npx marked — write the HTML directly for control over formatting). Escape document text and attribute values, use static HTML with no external scripts, fonts, or trackers, and preserve the Markdown content accurately. Save to `tailored-cvs/{Name}-cv-{company}-{role-short}-styled.html`.
 
 ### Step 7: Generate PDF
 
-Attempt PDF generation in this order:
+Prefer an already-installed Chromium-based browser so the PDF is generated from the styled HTML:
 
-1. **Try `npx md-to-pdf`:**
-   ```
-   npx md-to-pdf tailored-cvs/{Name}-cv-{company}-{role-short}.md --config-file none
-   ```
-   This works cross-platform if Node.js is installed.
+- **Windows:** Edge or Chrome in headless mode
+- **macOS:** Chrome in headless mode
+- **Linux:** Chrome or Chromium in headless mode
 
-2. **Try browser-based PDF (platform-dependent):**
-   - **Windows:** `msedge --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="{output}" "file:///{input-html}"`
-   - **Mac:** `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="{output}" "file:///{input-html}"`
-   - **Linux:** `google-chrome --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="{output}" "file:///{input-html}"` or `chromium --headless ...`
+Pass the absolute HTML file URI and an absolute output path as safely quoted arguments. Use the browser's `--headless`, `--disable-gpu`, `--no-pdf-header-footer`, and `--print-to-pdf=...` options with an isolated temporary user-data directory to avoid interfering with the user's browser session. Follow the active client's approval and sandbox rules when executing local applications.
 
-3. **Fallback:** If all automated methods fail, tell the user: "PDF generation failed. Open the HTML file in your browser and press Ctrl+P / Cmd+P to save as PDF. The HTML is styled for clean printing."
+If no compatible browser is installed, check whether a local Markdown-to-PDF tool is already available. Do not download or install a package without the user's approval. If automation is unavailable or fails, retain the Markdown and HTML and tell the user to open the HTML in a browser and use Print → Save as PDF.
+
+After generation, verify that the PDF was created or updated by this run, is non-empty, and has a plausible PDF file type. A stale PDF from a previous run does not count as success. Inspect rendered pages when local tools permit, checking for clipping or blank pages. Do not claim PDF success unless verification passes.
 
 Save PDF to `tailored-cvs/{Name}-cv-{company}-{role-short}.pdf`.
 
@@ -139,4 +142,4 @@ Ask if they want to make changes. Iterate until they're satisfied.
 
 ### Step 9: Update JD log
 
-After the CV is finalized, ask the user: "Would you like me to mark this role as 'Applied' in the JD log?" If yes, update the corresponding row in `jd-log.md`.
+Creating a CV does not mean the application was submitted. Preserve the corresponding row's Applied status in `jd-log.md`. Update it only when the user says they applied or explicitly requests that status change; preserve other rows and notes.

@@ -1,10 +1,11 @@
-# User workspace files (created by /setup, not part of the plugin)
+# User workspace files (created by setup, not part of the plugin)
 encyclopedia/
 jd-analysis/
 tailored-cvs/
 jd-log.md
 dimensions.md
 CLAUDE.md
+AGENTS.md
 
 # Local development skills (copies of skills/ for local testing)
 .claude/skills/
@@ -21,3 +22,8 @@ scraper/screening-log.md
 scraper/out/
 scraper/urls*.txt
 scraper/linkedin_screener_handoff.md
+
+# Local Python tooling
+.venv/
+__pycache__/
+*.py[cod]

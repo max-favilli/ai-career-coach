@@ -1,142 +1,129 @@
 ---
 name: setup
-description: "Set up the AI Career Coach: create workspace structure, build your career encyclopedia through an interactive interview, and define scoring dimensions. Use when: user says 'setup', 'get started', 'initialize', 'onboard'."
+description: Set up the AI Career Coach workspace and build a persistent career encyclopedia from an existing CV, LinkedIn export, career summary, or guided interview. Use when the user asks to set up, initialize, onboard, or get started with the career coach.
 ---
 
-# Setup — Career Coach Onboarding
+# Career Coach Setup
 
-One-time setup for the AI Career Coach. Creates workspace structure, builds your career encyclopedia through an interactive interview, and optionally defines scoring dimensions.
+Create the workspace structure, add project guidance for the active client, and build the user's career encyclopedia.
 
-## Instructions
+## Workspace and invocation
 
-### Step 1: Check if already set up
+Work in the user's career workspace, never in the installed plugin directory. Resolve all career-file paths relative to that workspace. If the current folder is the plugin source or installation, ask for a career workspace before saving personal information.
 
-Check if `CLAUDE.md` exists in the workspace root. If it does, warn the user: "Setup has already been run. Do you want to re-run it? This will overwrite your CLAUDE.md but will NOT touch your encyclopedia or other files." If they say no, stop.
+Skill names below can be invoked as `$ai-career-coach:skill-name` in Codex or `/ai-career-coach:skill-name` in Claude Code. Natural-language requests work in either client.
 
-### Step 2: Create folder structure
+## Interaction
 
-Create these directories if they don't exist:
+Ask one question at a time and wait for the answer. When an interactive user-input tool is available, use it with two or three mutually exclusive likely answers; otherwise ask the question directly in chat. Free-text answers must always remain possible.
+
+## 1. Check the current state
+
+Select `AGENTS.md` for Codex or `CLAUDE.md` for Claude. If the active client cannot be determined, ask which instruction file the user wants. Read that file and `encyclopedia/career-encyclopedia.md` if they exist.
+
+- If the selected instruction file already contains the managed Career Coach block shown below, update only that block as needed. An unchanged block requires no rewrite.
+- If an encyclopedia already exists, preserve it. Offer to enrich it through the clarification interview instead of starting over.
+- Preserve unrelated instructions in either file. Existing unmarked Career Coach instructions also remain intact unless the user requests migration; avoid appending a conflicting duplicate and explain any conflict that prevents adding guidance.
+
+## 2. Create the workspace
+
+Create these directories if needed:
+
 - `encyclopedia/`
 - `jd-analysis/`
 - `tailored-cvs/`
 
-### Step 3: Create CLAUDE.md
-
-Write the following content to `CLAUDE.md` in the workspace root:
+Create or update only the text between the markers below in the selected root instruction file. Preserve all content outside the markers. If there is no block, append it; if the file does not exist, create it. If markers are incomplete or duplicated, leave that file unchanged and explain the issue rather than guessing which content to replace. Keep the other client's instruction file unchanged unless the user requests both.
 
 ```markdown
+<!-- AI CAREER COACH:START -->
 # Career Coach Command Center
 
-This workspace is your long-term job hunting system. Claude is your career positioning partner, not a one-shot CV writer.
+This workspace is a long-term job-search system. Act as the user's career positioning partner.
 
-## Core Principles
+## Core principles
 
-1. **Never fabricate experience — but represent strategically.** Don't claim skills or achievements you don't have. But represent truthfully in the most favorable light. The CV's job is to get you past screening so you can prove your worth in person.
-2. **Authenticity over polish.** Preserve your personal voice. Generic corporate language is the enemy.
-3. **The encyclopedia is the source of truth.** `encyclopedia/career-encyclopedia.md` contains everything known about your career. Read it at the start of every task.
-4. **Interview before crafting.** For every new JD, conduct a gap interview before writing anything.
-5. **Honesty about fit.** Tell the user when a role is a poor match. Their time is more valuable than another application.
+1. Never fabricate experience, skills, dates, qualifications, or results. Represent verified facts strategically and truthfully.
+2. Preserve the user's voice and avoid generic corporate language.
+3. Treat `encyclopedia/career-encyclopedia.md` as the career source of truth and read it before career-coaching work.
+4. Interview before crafting an application for a new job description.
+5. Be candid when a role is a poor fit.
 
-## Interaction Style
+## Interaction
 
-**CRITICAL:** When asking questions during gap interviews, encyclopedia building, or any coaching interaction:
-- ALWAYS use the AskUserQuestion tool to ask questions
-- Ask ONE question at a time
-- Provide 2-4 pre-baked answer options that cover the most likely responses
-- The user can always select "Other" to provide free-text input
-- Wait for the answer before asking the next question
-- Never dump multiple questions at once
+- Ask one coaching or interview question at a time.
+- When an interactive user-input tool is available, provide two or three likely options while allowing free text.
+- Wait for the user's answer before continuing the interview.
 
-## Scoring Presentation
+## Scoring
 
-When scoring a JD against dimensions, ALWAYS present scores as a table for easy scanning:
+Present job-fit scores as a Markdown table with `Dimension`, `Score`, and `Notes` columns, followed by the recommendation and key concerns.
 
-| Dimension | Score | Notes |
-|---|---|---|
-| Hard Skills | X/10 | Brief note |
-| Domain | X/10 | Brief note |
-| ... | ... | ... |
+## Files
 
-Follow the table with the overall recommendation and key concerns.
+- `encyclopedia/career-encyclopedia.md` — career source of truth
+- `dimensions.md` — scoring criteria
+- `jd-analysis/` — saved job analyses
+- `jd-log.md` — job-analysis history
+- `tailored-cvs/` — generated CVs and cover letters
+- `screening-criteria.md` — optional personal screening rules
+- `scraper/screening-log.md` — batch-screening history
+- `scraper/out/` — fetched job descriptions
 
-## Folder Structure
+## Skills
 
-- `encyclopedia/career-encyclopedia.md` — Single source of truth for career history
-- `dimensions.md` — Scoring dimensions for JD evaluation
-- `jd-analysis/` — Job description analyses
-- `jd-log.md` — Running log of all analyzed JDs
-- `tailored-cvs/` — Output CVs (markdown, HTML, PDF)
+Use `$ai-career-coach:skill-name` in Codex or `/ai-career-coach:skill-name` in Claude Code; natural-language requests also work.
 
-## Available Commands
+- `setup` — onboarding
+- `dimensions` — define scoring criteria
+- `screen` — screen LinkedIn job postings
+- `jd` — analyze a job description
+- `cv` — create a tailored CV
+- `cover-letter` — create a cover letter
+- `add-to-encyclopedia` — add career information
 
-- `/setup` — Initial onboarding (run once)
-- `/dimensions` — Define or refine scoring dimensions
-- `/jd` — Analyze a job description
-- `/cv` — Craft a tailored CV after JD analysis
-- `/cover-letter` — Generate a tailored cover letter after JD analysis
-- `/add-to-encyclopedia` — Add new career content
+## Representation rules
 
-## Representation Rules
-
-- Never fabricate experience or skills
-- Frame oversight as oversight, not hands-on expertise
-- Early career dates can be approximate
-- Strategic representation is OK — help the company make a good hiring decision
-- Education: state what you studied and where, without specifying completion status unless the user tells you to
+- Distinguish hands-on expertise, working knowledge, oversight, and historical experience.
+- Approximate dates are acceptable only when labeled approximate.
+- Do not imply that education was completed unless the source of truth confirms it.
+<!-- AI CAREER COACH:END -->
 ```
 
-### Step 4: Build the career encyclopedia
+## 3. Gather source material
 
-Ask the user ONE question at a time using the AskUserQuestion tool. Always provide pre-baked answer options.
+Use source material already supplied in the conversation. Otherwise, ask: "Do you have an existing CV, LinkedIn export, or career summary I can start from?"
 
-**First question:** "Do you have an existing CV, LinkedIn export, or career summary I can start from?"
-- Options: "Yes, I'll paste it now" / "Yes, I have a file path" / "No, let's start from scratch"
+Likely options are:
 
-**If they provide content:** Read it and parse it into the encyclopedia structure below. Then you MUST conduct a thorough clarification interview BEFORE saving. Do NOT skip this step. Do NOT move on to dimensions until the interview is complete.
+- "Yes, I'll attach or paste it"
+- "Yes, I have a file path"
+- "No, interview me from scratch"
 
-**MANDATORY CLARIFICATION INTERVIEW (after parsing provided content):**
+If the user supplies content, parse it into the encyclopedia structure below, but do not save a mere reformatted copy. Clarify missing, vague, contradictory, or weak areas first.
 
-Go through the parsed content section by section and ask about anything that is missing, vague, or could be stronger. Ask ONE question at a time using AskUserQuestion. Typical gaps to probe:
+For each role, probe useful gaps such as dates, scope, team size, strongest achievement, measurable impact, technologies, and reason for leaving. For skills, establish whether the experience is deep hands-on, working knowledge, oversight, or historical. Always cover side projects, education, and career aspirations when the source does not.
 
-- **For each role:** "What was your team size at {company}?" / "What was the key achievement you're most proud of here?" / "Why did you leave?"
-- **Technologies:** "You mention {technology} — what's your honest proficiency level?" (Options: Deep hands-on / Working knowledge / Oversight only / Historical, not current)
-- **Missing sections:** If the content doesn't mention side projects, education details, or career aspirations, ask about each.
-- **Ambiguous dates:** "You mentioned {company} — when approximately did you start and leave?"
-- **Achievements without metrics:** "You mention {achievement} — can you quantify the impact? Team size, revenue, users, budget?"
-- **Career aspirations:** ALWAYS ask these even if not in the source content:
-  - "What kind of role are you looking for next?" 
-  - "What energizes you at work?"
-  - "What drains you?"
-  - "What's your minimum compensation requirement?"
-  - "Location preferences — remote, hybrid, relocation?"
+If starting from scratch, work through:
 
-Ask at minimum 5-8 clarifying questions. The goal is to make the encyclopedia richer than the source content, not just a reformatted copy. This interview is the core value of the setup process.
+1. Personal details: name, email, location, and languages.
+2. Education: subject, institution, dates, and confirmed completion status.
+3. Career timeline: company, title, dates, location, achievements, scope, team size, technologies, and reason for leaving for each role.
+4. Side projects, entrepreneurship, open source, and communities.
+5. Technology skills and honest proficiency.
+6. Career aspirations: desired role, energizers, drains, compensation floor, location/remote preferences, and company stage.
 
-**If starting from scratch (no source content):** Interview systematically through each section below, one question at a time:
+Continue until the source is materially clearer and richer. Do not force the user to answer optional sensitive fields such as compensation or contact details.
 
-1. **Personal details** — name, email, location, languages
-2. **Education** — degrees, institutions, dates
-3. **Career timeline** — for each role, ask:
-   - Company name and your title
-   - Dates (approximate is fine)
-   - Location
-   - What did you build/lead/deliver? (key achievements)
-   - Team size and scope
-   - Technologies used
-   - Why did you leave?
-4. **Side projects** — any startups, open source, communities
-5. **Technology skills** — for each technology, ask about proficiency level (deep/working/oversight/historical)
-6. **Career aspirations** — what they want next, what energizes them, what drains them, practical requirements (salary, location, company size)
+## 4. Save the encyclopedia
 
-### Step 5: Save the encyclopedia
-
-Save to `encyclopedia/career-encyclopedia.md` with this structure:
+Create `encyclopedia/career-encyclopedia.md` using this structure. For an existing encyclopedia, merge only new or corrected facts while retaining its content and organization:
 
 ```markdown
 # Career Encyclopedia
 
 > Single source of truth for your professional history.
-> Last updated: {date}
+> Last updated: {YYYY-MM-DD}
 
 ## Personal Details
 - Name:
@@ -145,36 +132,28 @@ Save to `encyclopedia/career-encyclopedia.md` with this structure:
 - Languages:
 
 ## Education
-(degrees, institutions, dates)
 
 ## Career Timeline
-(chronological, each role as a ### subsection with: company, title, dates, location, achievements, team size, technologies)
 
 ## Side Projects & Entrepreneurship
-(startups, open source, communities)
 
 ## Technology Skills — Truth Map
 | Skill | Level | Notes |
 |---|---|---|
-(each technology with honest proficiency: deep/working/oversight/historical)
 
 ## Career Aspirations
 - Ideal role:
 - What energizes you:
 - What drains you:
-- Salary minimum:
+- Compensation floor:
 - Location preferences:
 - Company size/stage preference:
 
 ## Key Stories & Differentiators
-(leadership stories, crisis management, unique achievements — added over time through /add-to-encyclopedia)
 ```
 
-### Step 6: Offer to define dimensions
+Use ISO dates where known. Treat direct, unambiguous user statements and supplied career records as source material; mark inferred, contradictory, or uncertain claims `[UNVERIFIED]`. Never silently resolve contradictions. Save useful confirmed progress if the user pauses the interview; identify remaining gaps without filling them in.
 
-Ask: "Would you like to define your scoring dimensions now? Dimensions are the criteria used to score job descriptions against your profile."
-- Options: "Yes, let's do it" / "No, I'll do it later with /dimensions"
+## 5. Finish
 
-If yes, tell the user to run `/dimensions`.
-
-Print a summary of what was created and what commands are available.
+Summarize the files created or updated. Offer to continue with the `dimensions` skill; if the user agrees, define the dimensions in the same conversation rather than making them repeat context.

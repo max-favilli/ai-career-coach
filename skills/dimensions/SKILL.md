@@ -1,11 +1,17 @@
 ---
 name: dimensions
-description: "Define or refine the scoring dimensions used to evaluate job descriptions against your profile. Use when: user says 'dimensions', 'scoring criteria', 'change how jobs are scored'."
+description: Define or refine the scoring dimensions and weights used to evaluate job descriptions against a career profile. Use when the user asks about dimensions, scoring criteria, job priorities, or changing how opportunities are scored.
 ---
 
 # Dimensions — Define Scoring Criteria
 
-Define or refine the scoring dimensions used by `/jd` to evaluate job descriptions against your profile.
+Define or refine the scoring dimensions used by the `jd` skill to evaluate job descriptions against the user's profile.
+
+## Workspace and invocation
+
+Resolve career-file paths relative to the user's career workspace, never the installed plugin directory. Skill names below can be invoked as `$ai-career-coach:skill-name` in Codex or `/ai-career-coach:skill-name` in Claude Code; natural-language requests also work.
+
+Ask one question at a time. Use an interactive user-input tool with two or three likely options when available; otherwise ask directly in chat.
 
 ## Instructions
 
@@ -15,13 +21,15 @@ Check if `dimensions.md` exists in the workspace root.
 
 **If it exists:** Read it, display the current dimensions in a concise summary, then ask:
 "Your current dimensions are shown above. What would you like to do?"
-- Options: "Refine these" / "Add a new dimension" / "Start over" / "They're fine, done"
+- Likely options: "Refine these" / "Add a dimension" / "They're fine"
 
-**If it doesn't exist:** Check if `encyclopedia/career-encyclopedia.md` has content. If so, read it — especially the Career Aspirations section — and suggest dimensions based on the user's profile and goals. If the encyclopedia is empty, tell the user to run `/setup` first.
+Honor any change already requested. Preserve existing custom dimensions and weights unless the user asks to replace them. If they are already satisfied, stop without rewriting the file.
+
+**If it doesn't exist:** Read `encyclopedia/career-encyclopedia.md`, especially Career Aspirations, to inform customization. If the encyclopedia is missing or empty, tell the user to use the `setup` skill first and stop.
 
 ### Step 2: Present the default dimensions
 
-Always start by presenting these 5 battle-tested dimensions. Do NOT invent new ones or rename them unless the user explicitly asks. These are the defaults:
+For a new set, start with these five defaults. Do not rename or add dimensions unless the user asks. When refining an existing set, work from its saved dimensions instead:
 
 1. **Hard Skills Match** — Technologies, tools, platforms, technical competencies. How well do the JD's technical requirements overlap with proven skills in the encyclopedia?
    - Scores high: significant overlap with hands-on skills
@@ -53,11 +61,13 @@ Always start by presenting these 5 battle-tested dimensions. Do NOT invent new o
 > - **3-4:** Weak — meaningful gaps or misalignment
 > - **1-2:** Hard blocker — fundamental mismatch or missing requirement
 
-Present all 5 to the user and ask: "These are the recommended scoring dimensions. Would you like to customize them?"
-- Options: "These are good, save them" / "I want to adjust weights" / "I want to add a dimension" / "I want to remove one"
+When creating a new set, present all five and ask: "These are the recommended scoring dimensions. Would you like to customize them?"
+- Likely options: "Save these" / "Adjust weights" / "Customize the set"
 
 For weight adjustment, ask about each dimension ONE at a time:
 - Options: "High" / "Medium" / "Low"
+
+Use Medium for every default unless the user chooses otherwise. Weights express relative priority in the recommendation: high matters more than medium, which matters more than low. Preserve any explicit weighting method the user already defined.
 
 If the user wants to add a custom dimension, ask for:
 - Name
@@ -71,8 +81,8 @@ Save to `dimensions.md` in workspace root:
 ```markdown
 # Scoring Dimensions
 
-> Used by /jd to evaluate job descriptions against your profile.
-> Customize with /dimensions at any time.
+> Used by the jd skill to evaluate job descriptions against your profile.
+> Customize with the dimensions skill at any time.
 > Last updated: {date}
 
 ## Dimensions
@@ -84,8 +94,12 @@ Save to `dimensions.md` in workspace root:
 - **Scores low when:** {criteria}
 
 (repeat for each dimension)
+
+## Scoring calibration
+
+(include the scoring anchors above)
 ```
 
 ### Step 4: Confirm
 
-Show the final dimensions and confirm with the user. Tell them these will be used by `/jd` to score every job description they analyze.
+Show the final dimensions and confirm the saved changes. Tell the user these will be used by the `jd` skill to score every job description they analyze.
