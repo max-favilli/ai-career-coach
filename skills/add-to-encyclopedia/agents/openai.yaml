@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Career Encyclopedia"
+  short_description: "Add verified experience to your career profile"
+  default_prompt: "Use $ai-career-coach:add-to-encyclopedia to add this career information to my profile."

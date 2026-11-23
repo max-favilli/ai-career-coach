@@ -11,7 +11,7 @@
 - [x] CLAUDE.md template with behavioral instructions (interactive questions, table scoring)
 - [x] JD log tracking (`jd-log.md`)
 - [x] Cross-platform PDF generation (npx md-to-pdf → browser headless → manual fallback)
-- [x] `.claude/settings.json` with permission allowlist
+- [x] PDF conversion support (execution permissions are managed by the host)
 - [x] `.claude-plugin/plugin.json` — plugin metadata with schema, validated
 - [x] Plugin directory structure (`skills/` at root with YAML frontmatter)
 - [x] Root `SKILL.md` with plugin overview
@@ -20,6 +20,18 @@
 - [x] ROADMAP.md
 - [x] Git repo initialized
 - [x] Published to GitHub (`max-favilli/ai-career-coach`)
+
+## Codex support
+
+- [x] Integrate upstream LinkedIn scraper, batch screening, and qualification-by-qualification JD matching
+- [x] Add `.codex-plugin/plugin.json` alongside the original Claude package
+- [x] Share all seven skills between hosts, with Codex discovery metadata
+- [x] Use host-appropriate invocation and interactive questions
+- [x] Preserve existing workspace instructions with managed `AGENTS.md` / `CLAUDE.md` sections
+- [x] Resolve bundled scraper paths from the installed plugin and write output to the user workspace
+- [x] Document installation, updates, optional dependencies, and privacy for both hosts
+- [x] Run package validation and host discovery checks (Codex CLI 0.171.0; Claude Code 2.1.143)
+- [ ] Complete the manual smoke tests in `CONTRIBUTING.md` in both hosts
 
 ## Phase 2: Testing & Polish
 
@@ -46,7 +58,7 @@
 - [ ] JD log: add columns for interview dates, outcome tracking
 - [ ] Encyclopedia: technology skills auto-suggest from parsed CVs
 - [ ] Dimensions: pre-built dimension sets for common profiles (engineer, director, product manager)
-- [ ] `marketplace.json` for self-hosted marketplace distribution
+- [x] `.claude-plugin/marketplace.json` for self-hosted distribution (also read by Codex)
 
 ## Phase 4: Community & Distribution
 

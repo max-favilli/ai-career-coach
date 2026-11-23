@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tailored CV"
+  short_description: "Create a truthful CV for an analyzed role"
+  default_prompt: "Use $ai-career-coach:cv to create a tailored CV for the role I analyzed."

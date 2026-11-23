@@ -1,0 +1,41 @@
+{
+  "name": "ai-career-coach",
+  "version": "1.1.0",
+  "description": "A long-term career positioning partner that builds a persistent career profile, evaluates job fit, and creates truthful tailored applications.",
+  "author": {
+    "name": "Max Favilli",
+    "url": "https://linkedin.com/in/maxfavilli"
+  },
+  "homepage": "https://github.com/max-favilli/ai-career-coach/blob/main/README.md",
+  "repository": "https://github.com/max-favilli/ai-career-coach",
+  "license": "MIT",
+  "keywords": [
+    "career",
+    "job-search",
+    "resume",
+    "cv",
+    "cover-letter",
+    "job-description"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Career Coach",
+    "shortDescription": "Build a career profile and create stronger applications",
+    "longDescription": "Build a career encyclopedia that improves over time, evaluate job descriptions against personalized criteria, and generate truthful, persona-targeted CVs and cover letters.",
+    "developerName": "Max Favilli",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/max-favilli/ai-career-coach",
+    "privacyPolicyURL": "https://github.com/max-favilli/ai-career-coach/blob/main/PRIVACY.md",
+    "defaultPrompt": [
+      "Set up my career profile from my existing CV.",
+      "Analyze this job description and tell me whether I should apply.",
+      "Create a tailored CV for the role I analyzed."
+    ],
+    "brandColor": "#1A5276"
+  }
+}

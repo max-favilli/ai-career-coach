@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(npx md-to-pdf *)",
-      "Bash(npx marked *)"
-    ]
-  }
-}

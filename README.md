@@ -1,178 +1,190 @@
 # AI Career Coach
 
-A Claude Code plugin that turns Claude into your long-term career positioning partner — not a one-shot CV writer.
+A plugin for **Claude Code and Codex** that becomes your long-term career positioning partner.
+
+It builds a persistent career encyclopedia that grows through job analyses and gap interviews. Applications become more precise as you capture more of your experience, and honest fit assessments help you decide when to apply or pass.
 
 ## What it does
 
-Most people paste a job description into AI and get a generic CV back. This plugin does something different: it builds a deep, persistent understanding of your career that **grows with every interaction**.
+1. **Evaluates opportunities before you invest time.** Parse a job description, research the employer, match every qualification against your experience, and score fit across customizable dimensions.
+2. **Surfaces experience you forgot to mention.** One-question-at-a-time interviews uncover relevant skills, stories, outcomes, and preferences, then save confirmed discoveries to your encyclopedia.
+3. **Creates persona-targeted applications.** Frame the same truthful career for a startup, enterprise, or consulting role without inventing experience.
+4. **Screens and tracks your search.** Batch-screen LinkedIn postings, identify promising roles, and keep analysis and screening logs.
 
-Every gap interview surfaces experience you forgot to mention. Every JD analysis reveals skills worth capturing. Every conversation adds to your career encyclopedia — so the 10th CV you generate is dramatically better than the first, because Claude knows things about your career that aren't on any single CV.
+## Install
 
-The plugin also tells you when to **pass** — your time is more valuable than another application.
+Choose your host. Both use the same skills and career files; install the plugin once per host.
 
-### Use cases
+### Claude Code
 
-1. **Analyze a job posting before applying** — Paste a JD, get an honest score across customizable dimensions (defaults: hard skills, domain, leadership, culture, career trajectory), and a clear recommendation: apply or pass. Stop wasting time on poor-fit roles.
-2. **Surface hidden experience through gap interviews** — The interactive interview digs into your past and surfaces relevant experience you forgot to mention. "Oh right, I did pre-sales at that job too." Every discovery gets saved to your encyclopedia.
-3. **Generate persona-targeted CVs** — The same career gets framed as "builder/CTO" for a startup, "SAP transformation leader" for enterprise, or "cloud modernization architect" for consulting — each truthful, each perfectly targeted to what the hiring manager is looking for.
-4. **Track your entire job search** — Every JD analyzed is logged with date, company, recommendation, and application status. See your full pipeline at a glance.
-
-## Getting Started
-
-### Prerequisites
-
-1. **Install Claude Code CLI** — If you don't have Claude Code yet, install it from [claude.ai/code](https://claude.ai/code). Claude Code is Anthropic's CLI tool for working with Claude directly in your terminal. Available on Mac, Windows, and Linux.
-
-2. **Verify it works** — Open your terminal and run:
-   ```bash
-   claude --version
-   ```
-
-### Install the plugin
+Install [Claude Code](https://claude.ai/code), then run:
 
 ```bash
-# Add the marketplace
 claude plugin marketplace add max-favilli/ai-career-coach
-
-# Install the plugin
-claude plugin install ai-career-coach
+claude plugin install ai-career-coach@ai-career-coach-marketplace
 ```
 
-### Set up your workspace
+Start a new session and use `/ai-career-coach:setup`. Plugin commands are namespaced; local standalone skills may also appear as `/setup`.
+
+### Codex
+
+Use a current [Codex](https://developers.openai.com/codex/) client with plugin support. With the Codex CLI:
 
 ```bash
-# Create a folder for your job search
+codex plugin marketplace add max-favilli/ai-career-coach
+codex plugin add ai-career-coach@ai-career-coach-marketplace
+```
+
+Start a new Codex session and select **AI Career Coach** in the skill picker, or ask, “Set up my career coach.” The workflows also support explicit `$ai-career-coach:setup`, `$ai-career-coach:jd`, and the other skill names below. If the picker shows qualified names, select the entry belonging to this plugin.
+
+Codex reads `.codex-plugin/plugin.json` and the existing `.claude-plugin/marketplace.json` through its legacy marketplace support. There is no separate skill copy to keep in sync. See OpenAI's [plugin packaging documentation](https://developers.openai.com/plugins/build/plugins).
+
+If `codex plugin add` is unavailable in your client version, register the marketplace with `codex plugin marketplace add`, then install **AI Career Coach** from that source in the desktop app's plugin browser. Restart the app and start a new chat after installation or updates.
+
+The commands above install the repository's default branch. To test an unmerged contribution, use the local checkout instructions under **Development**.
+
+### Optional tools
+
+Core coaching works with text and local files. Employer research needs browsing; when unavailable, the analysis records that limitation.
+
+LinkedIn URL screening uses the bundled Python scraper and requires Python 3 with `requests` and `beautifulsoup4`. Install these in a virtual environment if you want this feature:
+
+```bash
+python3 -m venv .venv
+# macOS / Linux
+. .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install requests beautifulsoup4
+```
+
+Use that environment's Python for scraping. Public postings may still be unavailable or rate-limited; paste the job description when retrieval fails. The plugin does not need a LinkedIn login for public guest-endpoint requests.
+
+PDF output uses installed local conversion tools when available. Otherwise, open the generated styled HTML in a browser and print to PDF. Node.js is needed only for a Node-based conversion fallback.
+
+## Getting started
+
+Open a dedicated job-search folder in your chosen host, separate from the plugin checkout or installation directory:
+
+```bash
 mkdir my-job-search
 cd my-job-search
-
-# Launch Claude Code
-claude
+# Launch either host:
+# claude
+# codex
 ```
 
-### Build your career profile
+1. Run **setup** with your CV, LinkedIn export, career summary, or a request for a guided interview. It creates the workspace and builds your encyclopedia.
+2. Define your **dimensions**: the criteria and weights that matter to your next role.
+3. Use **screen** for a batch of LinkedIn URLs, or **jd** for a detailed analysis of one posting.
+4. Use **cv** and **cover-letter** for a role you have analyzed and want to pursue.
 
-1. **Run `/setup`** — it walks you through everything interactively:
-   - Creates the folder structure
-   - Builds your career encyclopedia through an interview (you can paste an existing CV or LinkedIn export to speed this up)
-   - Optionally defines your scoring dimensions
+Setup adds a managed Career Coach section to `AGENTS.md` in Codex or `CLAUDE.md` in Claude Code. It preserves existing instructions and career files. Run setup once in each host if you use both with the same workspace.
 
-2. **Analyze a job** — paste a job description with `/jd`:
-   - Researches the company automatically
-   - Scores the role against your profile across customizable dimensions (hard skills, domain, leadership, culture, trajectory)
-   - Gives an honest recommendation: apply, stretch, or pass
-   - Conducts a gap interview to dig into your past experience that matches this specific JD
-   - New discoveries get added to your encyclopedia — so the next analysis is even better
+## Skills
 
-3. **Generate a tailored CV** — run `/cv` if the analysis says it's worth applying
+| Workflow | Codex | Claude Code |
+|---|---|---|
+| Initialize the workspace and build your profile | `$ai-career-coach:setup` | `/ai-career-coach:setup` |
+| Define or refine scoring criteria | `$ai-career-coach:dimensions` | `/ai-career-coach:dimensions` |
+| Batch-screen LinkedIn job postings | `$ai-career-coach:screen` | `/ai-career-coach:screen` |
+| Analyze a role and interview for gaps | `$ai-career-coach:jd` | `/ai-career-coach:jd` |
+| Create a tailored CV | `$ai-career-coach:cv` | `/ai-career-coach:cv` |
+| Write a concise cover letter | `$ai-career-coach:cover-letter` | `/ai-career-coach:cover-letter` |
+| Add career information to your profile | `$ai-career-coach:add-to-encyclopedia` | `/ai-career-coach:add-to-encyclopedia` |
 
-4. **Generate a cover letter** — run `/cover-letter` for a short, compelling letter in your voice
+Natural-language requests work in both hosts. Select the plugin's skill explicitly if another installed skill has the same name.
 
-### For developers (from source)
+## How it works
+
+### Career encyclopedia
+
+`encyclopedia/career-encyclopedia.md` is the source of truth: roles, achievements, technologies, honest proficiency levels, education, aspirations, constraints, and key stories. Every analysis reads it. Confirmed discoveries from gap interviews are saved back to it; uncertain or contradictory details are marked `[UNVERIFIED]` and excluded from application claims until clarified.
+
+### Scoring dimensions
+
+| Default dimension | What it measures |
+|---|---|
+| **Hard Skills Match** | Job requirements compared with proven skills |
+| **Domain Match** | Familiarity with the industry and business model |
+| **Leadership Match** | Scope, seniority, and organizational complexity |
+| **Culture & Values Match** | Employer signals compared with your preferences |
+| **Career Trajectory Fit** | Whether the role advances your goals |
+
+You can adjust the dimensions and their weights. Missing information receives a neutral score, not an optimistic assumption. Absolute disqualifiers remain visible even when the overall score is strong.
+
+### Screening and analysis
+
+**screen** retrieves LinkedIn postings, reports retrieval failures, applies your criteria, flags repeats, and ranks the opportunities. Promising roles then go to **jd** for a full assessment.
+
+**jd** matches each qualification to evidence before judging fit. It distinguishes required and preferred qualifications, asks about unknown or adjacent experience one question at a time, and separates hands-on work from leadership oversight. It saves the qualification table, dimension scores, recommendation, and sources, then updates `jd-log.md`.
+
+### Tailored applications
+
+**cv** selects a truthful frame based on the analyzed role: builder, enterprise leader, product leader, transformation leader, startup CTO, or consulting leader. It tailors the headline, summary, bullets, and emphasis while preserving the facts.
+
+The output includes Markdown and print-ready HTML. PDF generation is attempted when local tooling permits; success is reported only after the file has been verified. **cover-letter** uses the same evidence to write a concise letter in your voice.
+
+## Workspace structure
+
+```text
+my-job-search/
+├── AGENTS.md                         # Codex guidance, when set up in Codex
+├── CLAUDE.md                         # Claude guidance, when set up in Claude
+├── dimensions.md
+├── screening-criteria.md             # Optional personal screening rules
+├── jd-log.md
+├── encyclopedia/
+│   └── career-encyclopedia.md
+├── jd-analysis/
+│   └── {company}-{role}.md
+├── tailored-cvs/
+│   ├── {Name}-cv-{company}-{role}.md
+│   ├── {Name}-cv-{company}-{role}-styled.html
+│   ├── {Name}-cv-{company}-{role}.pdf   # When PDF generation succeeds
+│   └── {Name}-cover-letter-{company}-{role}.md
+└── scraper/
+    ├── screening-log.md
+    └── out/                          # Retrieved job postings and CSV
+```
+
+The scraper code stays in the installed plugin; its output belongs to your workspace. Keep career data private. See [Privacy](PRIVACY.md) for host processing and network behavior.
+
+## Development
+
+Clone this repository and check out the branch you want to test:
 
 ```bash
 git clone https://github.com/max-favilli/ai-career-coach.git
 cd ai-career-coach
-# Skills in .claude/skills/ are loaded automatically when you open Claude Code in this folder
 ```
 
-## Commands
+Register the checkout in the host you are testing:
 
-| Command | What it does |
-|---------|-------------|
-| `/setup` | One-time onboarding. Creates your workspace, builds your career encyclopedia through an interactive interview. |
-| `/dimensions` | Define the scoring criteria used to evaluate job descriptions against your profile. |
-| `/jd` | Analyze a job description. Scores it on your dimensions, gives an honest recommendation, conducts a gap interview. |
-| `/cv` | Craft a tailored CV for a role you've analyzed with `/jd`. Generates markdown, styled HTML, and PDF. |
-| `/cover-letter` | Generate a tailored cover letter for a role you've analyzed with `/jd`. Short, compelling, in your voice. |
-| `/add-to-encyclopedia` | Add new career content — paste a CV, LinkedIn export, or career notes and it gets integrated. |
+```bash
+# Codex
+codex plugin marketplace add .
+codex plugin add ai-career-coach@ai-career-coach-marketplace
 
-## How it works
-
-### The encyclopedia
-
-The core of the system is your **career encyclopedia** — a structured document containing everything about your professional history: roles, achievements, technologies, skills (with honest proficiency levels), career aspirations, and key stories. The `/setup` command builds this through an interactive interview, and `/add-to-encyclopedia` lets you expand it over time.
-
-The encyclopedia is the single source of truth. Every JD analysis and CV tailoring reads from it. **Crucially, it grows with every interaction:** gap interviews during `/jd` often surface experience you didn't think to include ("Oh right, I did pre-sales at that job too"), and those discoveries get added back to the encyclopedia. The more jobs you analyze, the more Claude knows about you, and the more precise every subsequent CV becomes.
-
-### Dimensions
-
-Scoring dimensions define what matters to YOU in a job. The defaults are:
-
-| Dimension | What it measures |
-|-----------|-----------------|
-| **Hard Skills Match** | How well the JD's technical requirements overlap with your proven skills |
-| **Domain Match** | Your familiarity with the industry and business model |
-| **Leadership Match** | Whether the role's scope matches your leadership experience |
-| **Culture & Values** | Company culture signals vs. what energizes you |
-| **Career Trajectory** | Whether this role moves you toward your stated career goals |
-
-You can customize weights, add dimensions, or remove ones that don't matter to you.
-
-### JD analysis
-
-When you run `/jd`, the plugin:
-- Parses the job description into structured sections
-- Identifies the "persona" the company is looking for
-- Scores the match on each of your dimensions (presented as a table)
-- Gives an honest recommendation: **Strong match** / **Worth applying** / **Stretch** / **Pass**
-- Conducts a gap interview — one question at a time with pre-baked answer options — to surface hidden experience and identify deal-breakers
-- **Updates your encyclopedia** with anything new discovered during the interview (skills, experience, preferences you hadn't captured yet)
-- Saves the analysis and appends to a running log (`jd-log.md`)
-
-### Tailored CVs
-
-The `/cv` command doesn't just reshuffle bullet points. It selects the right **frame** for your experience based on what the JD is actually asking for:
-
-- **Builder / Technical Leader** — greenfield builds, architecture, hands-on depth
-- **Enterprise / Strategic Leader** — scale, budget, team size, stakeholder management
-- **Product / Digital Leader** — revenue impact, user growth, product thinking
-- **Transformation Leader** — change management, modernization, crisis turnaround
-- **Startup / CTO** — full-stack ownership, speed, founder mentality
-
-It tailors the headline, summary, bullet selection, and emphasis to match. Output: markdown, print-ready styled HTML, and PDF.
-
-## Workspace structure
-
-After `/setup`, your workspace looks like this:
-
-```
-my-job-search/
-├── CLAUDE.md                    # Behavioral instructions (created by /setup)
-├── dimensions.md                # Your scoring criteria
-├── jd-log.md                    # Running log of all analyzed JDs
-├── encyclopedia/
-│   └── career-encyclopedia.md   # Your career source of truth
-├── jd-analysis/
-│   └── {company}-{role}.md      # One file per analyzed JD
-└── tailored-cvs/
-    ├── {Name}-cv-{company}.md
-    ├── {Name}-cv-{company}-styled.html
-    └── {Name}-cv-{company}.pdf
+# Claude Code
+claude plugin marketplace add .
+claude plugin install ai-career-coach@ai-career-coach-marketplace
 ```
 
-## Why it gets better over time
+If this marketplace name is already registered from another source, use that host's marketplace management commands to remove the old registration before adding the local checkout. Installing a plugin copies it into a cache; refresh/reinstall after edits and start a new session. For Claude, `claude --plugin-dir /absolute/path/to/ai-career-coach` also loads the checkout directly for a development session.
 
-This is what makes the plugin different from a one-shot AI CV generator:
+Run the repository checks:
 
-1. **JD #1:** You run `/setup`, paste your CV, answer 10 questions. The encyclopedia has the basics.
-2. **JD #5:** Gap interviews have surfaced pre-sales experience you forgot, a side project with 1M users, and the fact that you provisioned cloud infrastructure yourself. All added to the encyclopedia.
-3. **JD #15:** Claude knows your career so deeply that it can frame your experience as a "builder who brings order to complexity" for a startup, or an "SAP transformation leader" for an enterprise role, or a "cloud modernization architect" for a consulting firm — each version truthful, each perfectly targeted. The encyclopedia now contains insights that no single CV or LinkedIn profile ever captured.
+```bash
+python3 -m pip install -r requirements-dev.txt
+python3 scripts/validate_plugin.py
+python3 -m unittest discover -s tests
+```
 
-The encyclopedia is the compounding asset. Every conversation makes it richer.
+See [Contributing](CONTRIBUTING.md) for the manual smoke-test checklist and the limits of automated validation.
 
-## Philosophy
+## Principles
 
-- **Interview before crafting.** Every analysis starts with understanding, not output.
-- **Honesty about fit.** The plugin tells you to pass when a role is wrong. That's a feature.
-- **Never fabricate.** Strategic representation is OK. Lying is not.
-- **Your voice, not corporate boilerplate.** The CV should sound like you, not a template.
-- **One question at a time.** All interactions use interactive questions with pre-baked options. No walls of text.
-
-## Requirements
-
-- [Claude Code](https://claude.ai/code) CLI
-- Node.js (optional, for automated PDF generation via `npx md-to-pdf`)
-- A browser (fallback for PDF generation — the styled HTML prints cleanly)
+Interview before crafting. Be honest about fit. Never fabricate. Preserve the user's voice. Distinguish hands-on skill, working knowledge, oversight, and historical experience. Ask one coaching question at a time.
 
 ## Author
 
